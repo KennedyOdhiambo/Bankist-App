@@ -90,7 +90,6 @@ function createUsername(accs) {
   });
 }
 
-console.log(accounts);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -116,3 +115,10 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // movements.forEach(function (movement) {
 //   if (movement > 0) {
 //     console.log(`You deposited ${movement}
+console.log(movements);
+
+const balance = movements.reduce(function (acc, cur, i, arr) {
+  return acc + cur;
+}, 0);
+
+console.log(balance);
