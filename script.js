@@ -88,6 +88,19 @@ const calcDisplayBalance = function (movements) {
 };
 calcDisplayBalance(account1.movements);
 
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}EUR`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(out)}EUR`;
+};
+calcDisplaySummary(account1.movements);
+
 function createUsername(accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -97,6 +110,7 @@ function createUsername(accs) {
       .join('');
   });
 }
+createUsername(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -123,9 +137,17 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // movements.forEach(function (movement) {
 //   if (movement > 0) {
 //     console.log(`You deposited ${movement}
-console.log(movements);
+// console.log(movements);
 
-const balance = movements.reduce(function (acc, cur, i, arr) {
-  return acc + cur;
-}, 0);
-console.log(balance);
+// const balance = movements.reduce(function (acc, cur, i, arr) {
+//   return acc + cur;
+// }, 0);
+// console.log(balance);
+// function calcAverageHumanAge(ages) {
+//   const humanage = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+//   const adults = humanage.filter(age => age >= 18);
+//   const average = adults.reduce((acc, age) => acc + age, 0) / adults.length;
+//   return average;
+// }
+
+// console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
