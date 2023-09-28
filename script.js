@@ -143,11 +143,11 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //   return acc + cur;
 // }, 0);
 // console.log(balance);
-// function calcAverageHumanAge(ages) {
-//   const humanage = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
-//   const adults = humanage.filter(age => age >= 18);
-//   const average = adults.reduce((acc, age) => acc + age, 0) / adults.length;
-//   return average;
-// }
+function calcAverageHumanAge(ages) {
+  const humanage = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+  const adults = humanage.filter(age => age >= 18);
+  const average = adults.reduce((acc, age) => acc + age, 0) / adults.length;
+  return average;
+}
 
 // console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
