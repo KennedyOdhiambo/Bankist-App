@@ -160,3 +160,28 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // }
 
 // console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
+
+// function calcAverageHumanAge(ages) {
+//   const average =
+//     ages
+//       .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+//       .filter(age => age >= 18)
+//       .reduce((acc, age) => acc + age, 0) /
+//     ages
+//       .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+//       .filter(age => age >= 18).length;
+
+//   return average;
+// }
+
+// const arr1 = [5, 2, 4, 1, 15, 8, 3];
+// console.log(calcAverageHumanAge(arr1));
+
+// const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+// console.log(account );
+
+for (let acc of accounts) {
+  if (acc.owner === 'Jessica Davis') {
+    console.log(acc);
+  }
+}
