@@ -86,12 +86,20 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements, sort = false) {
+const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort
+    ? acc.movements.slice().sort((a, b) => a - b)
+    : acc.movements;
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const date = new date(acc.movementsDates[i]);
+    const day = `${date.getDate()}`.padStart(2, 0);
+    const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    const year = date.getFullYear();
+
+    const displayDate = `${day}/${month}/${year}`;
 
     const html = `
     <div class="movements__row">
@@ -162,7 +170,7 @@ btnLogin.addEventListener('click', function (e) {
     acc => acc.username === inputLoginUsername.value
   );
   console.log(currentAccount);
-  if (currentAccount?.pin === +(inputLoginPin.value)) {
+  if (currentAccount?.pin === +inputLoginPin.value) {
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
     }`;
@@ -176,7 +184,7 @@ btnLogin.addEventListener('click', function (e) {
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = +(inputTransferAmount.value);
+  const amount = +inputTransferAmount.value;
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
@@ -196,7 +204,7 @@ btnTransfer.addEventListener('click', function (e) {
 
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = +(inputLoanAmount.value);
+  const amount = +inputLoanAmount.value;
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     currentAccount.movements.push(amount);
@@ -209,7 +217,7 @@ btnClose.addEventListener('click', function (e) {
   e.preventDefault();
   if (
     inputCloseUsername.value === currentAccount.username &&
-    +(inputClosePin.value) === currentAccount.pin
+    +inputClosePin.value === currentAccount.pin
   ) {
     const index = accounts.findIndex(
       acc => acc.username === currentAccount.username
