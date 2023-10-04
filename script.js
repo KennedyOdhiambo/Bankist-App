@@ -286,3 +286,57 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+
+//recommendedFood = weight ** 0.75 * 28.
+
+dogs.forEach(function (dog) {
+  dog.recFood = dog.weight ** 0.75 * 28;
+});
+
+console.log(dogs);
+
+const dogSarah = dogs.find(function (dog) {
+  return dog.owners.includes('Sarah');
+});
+
+console.log(dogSarah);
+if (dogSarah.curFood > dogSarah.recFood) {
+  console.log(`sarah's dog is eating too much`);
+} else {
+  console.log(`sarah's dog is eating too little`);
+}
+
+const ownersEatTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recFood)
+  .map(dog => dog.owners)
+  .flat();
+console.log(
+  `${ownersEatTooMuch[0]}'s,${ownersEatTooMuch[1]}'s and ${ownersEatTooMuch[2]}'s dogs eat too much!`
+);
+
+const ownersEatTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recFood)
+  .map(dog => dog.owners)
+  .flat();
+console.log(
+  `${ownersEatTooLittle[0]}'s,${ownersEatTooLittle[1]}'s and ${ownersEatTooLittle[2]}'s dogs eat too little!`
+);
+
+console.log(dogs.some(dog => (dog.curFood = dog.recFood)));
+console.log(
+  dogs.some(
+    dog => (dog.curFood < dog.recFood * 0.9) | (dog.curFood > dog.recFood * 1.1)
+  )
+);
+
+const okayAmount = dogs.filter(
+  dog => (dog.curFood < dog.recFood * 0.9) | (dog.curFood > dog.recFood * 1.1)
+);
+console.log(okayAmount);
